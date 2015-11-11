@@ -1,0 +1,15 @@
+<?xml version="1.0"?> <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.dmtool.domain">
+	<class name="AdmConfig" table="adm_config">
+		<id name="id" column="ID" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="envName" column="ENV_NAME" type="string" />
+		<property name="admConfigType" column="Config_Type" type="string" />
+		<property name="userId" column="USER_ID" type="string" />
+		<property name="password" column="PASSWORD" type="string" />
+		<property name="seibelServer" column="SEIBEL_SERVER" type="string" />
+		<property name="rowId" column="ROW_ID" type="string" />
+		<property name="logFilePath" column="LOG_FILE_PATH" type="string" />
+	</class>
+</hibernate-mapping>

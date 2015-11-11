@@ -1,0 +1,160 @@
+<div class="container" ng-controller="reposCtrl">
+	<div class="container">
+		<h2>Add Repository Info.</h2>
+		<form class="form-horizontal" role="form">
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label col-sm-6 col-md-6" for="email">Environment:</label>
+				<div class="dropdown col-sm-6 col-md-6">
+					<button class="btn btn-primary dropdown-toggle" type="button"
+						data-toggle="dropdown">
+						{{envName}} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu form-group  col-sm-6 col-md-6">
+						<li ng-repeat="env in allEnvs"><a
+							ng-click="dropboxitemselected(env.name)" ng-model="envName">{{env.name}}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label col-sm-6 col-md-6" for="email">Export/Import:</label>
+				<div class="dropdown col-sm-6 col-md-6">
+					<button class="btn btn-primary dropdown-toggle" type="button"
+						data-toggle="dropdown">
+						{{repoType}}<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu form-group  col-sm-6 col-md-6">
+						<li><a ng-click="dropboxRepoTypeSelected('Export')"
+							ng-model="repoType">Export</a></li>
+						<li><a ng-click="dropboxRepoTypeSelected('Import')"
+							ng-model="repoType">Import</a></li>
+						<li><a ng-click="dropboxRepoTypeSelected('DDLSync')"
+							ng-model="repoType">DDLSync</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label col-sm-6 col-md-6" for="email">User
+					Id :</label>
+				<div class="col-sm-6 col-md-6">
+					<input type="text" class="form-control" placeholder="Enter User Id"
+						name="name" ng-model="userId" />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6  col-md-6">
+				<label class="control-label col-sm-6 col-md-6" for="email">Password:</label>
+				<div class="col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Password" name="hostName" ng-model="password" />
+				</div>
+			</div>
+			<div class="form-group   col-sm-6 col-md-6">
+				<label class="control-label   col-sm-6 col-md-6" for="email">ODBC:</label>
+				<div class="  col-sm-6 col-md-6">
+					<input type="text" class="form-control" placeholder="Enter ODBC"
+						name="enterpriseName" ng-model="odbc" />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label   col-sm-6 col-md-6" for="email">Repository
+					Name:</label>
+				<div class="col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Repository Name" name="serverHost"
+						ng-model="repoName" />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label   col-sm-6 col-md-6" for="email">Export
+					File Path:</label>
+				<div class="  col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Export File Path" name="serverName"
+						ng-model="filePath" />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label  col-sm-6 col-md-6" for="email">Log
+					File Path:</label>
+				<div class="  col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Log File Path" name="service"
+						ng-model="logFilePath" />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label  col-sm-6 col-md-6" for="email">Table
+					Space for DDLSynch:</label>
+				<div class="  col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Log File Path" name="service"
+						ng-model="tableDDLSync" " />
+				</div>
+			</div>
+			<div class="form-group  col-sm-6 col-md-6">
+				<label class="control-label  col-sm-6 col-md-6" for="email">Index
+					Space for DDLSynch:</label>
+				<div class="  col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Log File Path" name="service"
+						ng-model="indexDDLSync" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default" ng-click="addRepos()">
+						<span ng-show="id">Update</span> 
+						<span ng-show="!id">Save</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="container">
+		<h2>Respositories</h2>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Environment Name</th>
+					<th>Repo Type</th>
+					<th>User Id</th>
+					<th>Password</th>
+					<th>ODBC</th>
+					<th>File Path</th>
+					<th>Repository Name</th>
+					<th>Log File Path</th>
+					<th>Table DDl Sync</th>
+					<th>Index DDl Sync</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="repos in allRepos">
+				<tr>
+					<td>{{repos.id}}</td>
+					<td>{{repos.envName}}</td>
+					<td>{{repos.repoType}}</td>
+					<td>{{repos.userId}}</td>
+					<td>{{repos.password}}</td>
+					<td>{{repos.odbc}}</td>
+					<td>{{repos.filePath}}</td>
+					<td>{{repos.repoName}}</td>
+					<td>{{repos.logFilePath}}</td>
+					<td>{{repos.tableDDLSync}}</td>
+					<td>{{repos.indexDDLSync}}</td>
+					<td>
+						<button type="button" class="btn btn-default"
+							aria-label="Left Align" ng-click="modifyRepos(repos)">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+						</button>
+
+					</td>
+					<td>
+						<button type="button" class="btn btn-default"
+							aria-label="Left Align" ng-click="deleteRepos(repos)">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

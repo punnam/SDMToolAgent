@@ -1,0 +1,10 @@
+<?xml version="1.0"?> <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.dmtool.domain">
+	<class name="LicenseMgt" table="license_mgt">
+		<id name="id" column="ID" type="java.lang.Integer">
+            <generator class="increment"></generator>
+        </id>
+		<property name="type" column="type" type="string" />
+		<property name="expiryDate" column="expiry_date" type="java.sql.Date" />
+	</class>
+</hibernate-mapping>
