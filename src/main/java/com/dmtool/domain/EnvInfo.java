@@ -1,6 +1,6 @@
 package com.dmtool.domain;
 
-public class EnvInfo {
+public class EnvInfo extends AuditInfo{
 	private Integer id;
 	private String name;
 	private String hostName;
@@ -10,6 +10,7 @@ public class EnvInfo {
 	private String service;
 	private String seibelPath;
 	private String admPath;
+	
 	public Integer getId() {
 		return id;
 	}
