@@ -25,7 +25,6 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider,$loc
 
 app.controller('homeCtrl', [ '$scope', '$http', '$filter',
                        		function($scope, $http, $filter) {
-                       	alert("Punnam");
                        			$http.get("rest/getAgentInfo/").success(function(response) {
                        				
                        				$scope.agentInfo = response.data;
