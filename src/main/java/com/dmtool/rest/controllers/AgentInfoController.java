@@ -36,6 +36,7 @@ public class AgentInfoController {
 	
 	private static final String DATA_FIELD = "data";
 	private static final String ERROR_FIELD = "error";
+	private String sDMToolServerUrl= "";
 
 	private static final Logger logger_c = Logger.getLogger(AgentInfoController.class);
 	public static boolean isEmpty(String s_p) {
@@ -77,28 +78,29 @@ public class AgentInfoController {
 	public void setJsonView(View view) {
 		jsonView_i = view;
 	}
+
 	private void sendPOST(AgentInfo agentInfo) throws IOException {
-		String POST_URL ="http://localhost:8080/SDMTool/rest/saveAgentInfo/"; 
-		                  //http://localhost:8080/SDMTool/index.html#/
+		//String POST_URL = "http://localhost:8080/SDMTool/rest/saveAgentInfo/";
+		// http://localhost:8080/SDMTool/index.html#/
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		String jsonInString = mapper.writeValueAsString(agentInfo);
-		
-		   CloseableHttpClient client = HttpClients.createDefault();
-		    HttpPost httpPost = new HttpPost(POST_URL);
-		    StringEntity entity = new StringEntity(jsonInString);
-		    entity.setContentType("application/json");
-		    httpPost.setEntity(entity);
-		    //httpPost.setHeader("Accept", "application/json");
-		    //httpPost.setHeader("Content-type", "application/json");
-		 
-		    CloseableHttpResponse response = client.execute(httpPost);
-		    System.out.println(response.getStatusLine().getStatusCode());
-		    System.out.println(response.getStatusLine().getReasonPhrase());
-		    client.close();
- 
-    }
+
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(sDMToolServerUrl);
+		StringEntity entity = new StringEntity(jsonInString);
+		entity.setContentType("application/json");
+		httpPost.setEntity(entity);
+		// httpPost.setHeader("Accept", "application/json");
+		// httpPost.setHeader("Content-type", "application/json");
+
+		CloseableHttpResponse response = client.execute(httpPost);
+		System.out.println(response.getStatusLine().getStatusCode());
+		System.out.println(response.getStatusLine().getReasonPhrase());
+		client.close();
+
+	}
 	
 
 	private  String getStringFromInputStream(InputStream is) {
@@ -153,5 +155,10 @@ public class AgentInfoController {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+	@RequestMapping(value = "/rest/setSDMToolServerUrl/", method = RequestMethod.POST)
+	public boolean setSDMToolServerUrl(String url) {
+		sDMToolServerUrl = url;
+		return true;
 	}
 } 																											
