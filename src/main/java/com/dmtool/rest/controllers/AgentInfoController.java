@@ -156,9 +156,10 @@ public class AgentInfoController {
 		}
 		return sb.toString();
 	}
-	@RequestMapping(value = "/rest/setSDMToolServerUrl/", method = RequestMethod.POST)
-	public boolean setSDMToolServerUrl(String url) {
+	@RequestMapping(value = "/rest/setUrl/", method = RequestMethod.POST)
+	public String setSDMToolServerUrl(String urls) {
+		String url = request.getParameter("SdmServerUrl");
 		sDMToolServerUrl = url;
-		return true;
+		return "true";
 	}
 } 																											
