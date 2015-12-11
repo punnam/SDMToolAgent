@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +46,7 @@ public class AgentInfoController {
 	
 	@RequestMapping(value = "/rest/getAgentInfo/", method = RequestMethod.GET)
 	public ModelAndView getAgentInfo() throws IOException {
-		String host = request.getRemoteHost();
+		String host = InetAddress.getLocalHost().getHostAddress();
 		int remotePort = request.getRemotePort();
 		String remoteUser = request.getRemoteUser();
 		String remoteAddress = request.getRemoteAddr();
