@@ -89,7 +89,7 @@ public class AgentInfoController {
 		String jsonInString = mapper.writeValueAsString(agentInfo);
 
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost(sDMToolServerUrl);
+		HttpPost httpPost = new HttpPost(sDMToolServerUrl+"/rest/saveAgentInfo/");
 		StringEntity entity = new StringEntity(jsonInString);
 		entity.setContentType("application/json");
 		httpPost.setEntity(entity);
