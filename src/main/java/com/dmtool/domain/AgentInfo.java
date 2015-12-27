@@ -1,12 +1,16 @@
 package com.dmtool.domain;
 
 public class AgentInfo {		
-	private String host;;
+	private String host;
 	private int remotePort;
-	private String remoteUser;;
-	private String remoteAddress;;
-	private String serverName;;
+	private String remoteUser;
+	private String remoteAddress;
+	private String serverName;
 	int serverPort;
+	private String sdmToolServerUrl;
+	public AgentInfo(){
+		super();
+	}
 	public AgentInfo(String host, int remotePort, String remoteUser, String remoteAddress, String serverName,
 			int serverPort) {
 		super();
@@ -52,5 +56,11 @@ public class AgentInfo {
 	}
 	public void setServerPort(int serverPort) {
 		this.serverPort = serverPort;
+	}
+	public String getSdmToolServerUrl() {
+		return sdmToolServerUrl;
+	}
+	public void setSdmToolServerUrl(String sdmToolServerUr) {
+		this.sdmToolServerUrl = sdmToolServerUr;
 	}
 }

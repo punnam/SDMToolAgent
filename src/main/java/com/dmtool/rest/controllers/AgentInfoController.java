@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -17,8 +18,10 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
@@ -53,7 +56,8 @@ public class AgentInfoController {
 		String serverName = request.getServerName();
 		int serverPort = request.getServerPort();
 		AgentInfo agentInfo = new AgentInfo(host, remotePort, remoteUser, remoteAddress,serverName,serverPort);
-		sendPOST(agentInfo);
+		//sendPOST(agentInfo);
+		System.out.println("Punnam::"+sDMToolServerUrl);
 		logger_c.debug("Returing Agent Info: " + agentInfo.toString());
 		return new ModelAndView(jsonView_i, DATA_FIELD, agentInfo);
 	}
@@ -81,8 +85,6 @@ public class AgentInfoController {
 	}
 
 	private void sendPOST(AgentInfo agentInfo) throws IOException {
-		//String POST_URL = "http://localhost:8080/SDMTool/rest/saveAgentInfo/";
-		// http://localhost:8080/SDMTool/index.html#/
 		ObjectMapper mapper = new ObjectMapper();
 
 		// Object to JSON in String
@@ -150,17 +152,17 @@ public class AgentInfoController {
 			sb.append(System.lineSeparator());
 			sb.append(outputString);
 			return sb.toString();
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sb.toString();
 	}
-	@RequestMapping(value = "/rest/setUrl/", method = RequestMethod.POST)
-	public String setSDMToolServerUrl(String urls) {
-		String url = request.getParameter("SdmServerUrl");
-		sDMToolServerUrl = url;
+	@RequestMapping(value = "/rest/setSDMToolServerUrl/",  method = RequestMethod.POST)
+	public String setSDMToolServerUrl(@RequestBody AgentInfo agnentInfo,
+			HttpServletResponse httpResponse_p, WebRequest request_p) {
+		sDMToolServerUrl = agnentInfo.getSdmToolServerUrl();
+		System.out.println("sDMToolServerUrl:" + sDMToolServerUrl);
 		return "true";
 	}
 } 																											

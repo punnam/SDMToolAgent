@@ -1,0 +1,23 @@
+<div class="container" ng-controller="AgentController">
+	<div class="container">
+		<h2>Agent Info</h2>
+		<form class="form-horizontal" role="form">
+			<div class="form-group  col-sm-12  col-md-12">
+				<label class="control-label col-sm-3 col-md-3" for="email">Server Url:</label>
+				<div class="col-sm-6 col-md-6">
+					<input type="text" class="form-control"
+						placeholder="Enter Gateway Host Name" name="hostName"
+						ng-model="serverUrl" />
+				</div>
+			</div>
+			<div class="form-group" class="col-sm-offset-12 col-sm-12">
+				<div class="col-sm-offset-3 col-sm-3">
+					<button type="submit" class="btn btn-default"
+						ng-click="addEnvInfo()">
+						<span ng-show="id">Update</span> <span ng-show="!id">Save</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
